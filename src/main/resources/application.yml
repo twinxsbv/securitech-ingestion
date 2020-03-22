@@ -1,0 +1,50 @@
+server:
+  port: 8180
+spring:
+  application:
+    name: Securitech Ingestion Service
+  profiles:
+    active: ${PROFILE}
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: /management/health
+        instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+        service-name: securitech ingestion service
+        port: 8300
+      config:
+        watch:
+          enabled: false
+    stream:
+      function:
+        bindings:
+          log-in-0: 'input'
+          supply-out-0: 'output'
+      bindings:
+        input:
+          destination: 'securitech-queue'
+        output:
+          destination: 'securitech-queue'
+    function:
+      definition: log;supply
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration
+# ===================================================================
+application:
+  queue:
+    name: 'securitech-queue'
+  securitech:
+    url:
+      callback: 'net.tcp://twinxsdrc.securiportal.com:16000/DRProxyINTCbC'
+      soap: 'http://broker.accoda.nl:8080/DRProxySOAP'
+      rest: 'http://broker.accoda.nl:8080/DRProxyREST'
+    retention:
+      cron: ${SCANSERVICE_RETENTION_CRON:* * * * * *}
+      days: ${SCANSERVICE_RETENTION_DAYS:3}
+    token: '2d382644-bb54-4130-928b-cddb2c69e070'
+    customers:
+       - custnumber: 'D2782'
+         locationcode: 'NLD1323VK23-002'

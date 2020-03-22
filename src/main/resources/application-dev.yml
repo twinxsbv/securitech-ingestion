@@ -1,0 +1,18 @@
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+        allowed-headers: '*'
+spring:
+  data:
+    mongodb:
+      database: ${MONGO_DATABASE:drscans}
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27017}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
