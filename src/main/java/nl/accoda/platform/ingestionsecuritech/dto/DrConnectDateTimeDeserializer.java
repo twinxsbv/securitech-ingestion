@@ -23,7 +23,7 @@ public class DrConnectDateTimeDeserializer extends JsonDeserializer<LocalDateTim
         // 1535491858840
         String epoch = epochAndOffset.substring(0, epochAndOffset.length() - 5);
 
-        // -0500 Note, behoud de indicator
+        // -0500 Note, behoudt de indicator
         String offset = epochAndOffset.substring(epoch.length());
         ZoneId zoneId = ZoneId.of("UTC" + offset);
 

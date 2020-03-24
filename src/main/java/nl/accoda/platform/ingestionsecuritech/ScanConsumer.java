@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import nl.accoda.platform.ingestionsecuritech.model.base.SecuritechDocumentScan;
 import org.springframework.stereotype.Component;
 
-
 import java.util.function.Consumer;
 
 @Slf4j
@@ -13,7 +12,9 @@ public class ScanConsumer implements Consumer<SecuritechDocumentScan> {
 
     @Override
     public void accept(SecuritechDocumentScan scan) {
-         log.info("Processing log function for list {}", scan);
+        if (scan.getToken() != null)
+            log.info("Processing consumer function for {} {}", scan.getPersonalData().getFirstNames(),
+                    scan.getPersonalData().getLastName());
 
     }
 

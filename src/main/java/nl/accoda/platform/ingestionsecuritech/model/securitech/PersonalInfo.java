@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.accoda.platform.ingestionsecuritech.dto.DrConnectDateDeserializer;
 import nl.accoda.platform.ingestionsecuritech.dto.DrConnectDateTimeDeserializer;
 import nl.accoda.platform.ingestionsecuritech.dto.DrConnectSexDeserializer;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor

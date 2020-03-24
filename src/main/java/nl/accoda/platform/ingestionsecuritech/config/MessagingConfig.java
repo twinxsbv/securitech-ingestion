@@ -6,7 +6,6 @@ import nl.accoda.platform.ingestionsecuritech.services.ProxyScanService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 @Configuration
@@ -25,8 +24,9 @@ public class MessagingConfig {
     }
 
     @Bean
-    public Supplier supply() {
-       return  proxyScanService.getLatestSecuritechScans();
+    public Supplier<SecuritechDocumentScan> supply() {
+       return proxyScanService::getLatestSecuritechScans;
     }
+
 
 }

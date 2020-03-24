@@ -1,18 +1,12 @@
 package nl.accoda.platform.ingestionsecuritech.tasks;
 
 
-import nl.accoda.platform.ingestionsecuritech.error.ConnectionPropertiesException;
-import nl.accoda.platform.ingestionsecuritech.model.securitech.ProxyScan;
 import nl.accoda.platform.ingestionsecuritech.services.ProxyScanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Component
 public class CleanUpDrConnectTask {
@@ -29,34 +23,35 @@ public class CleanUpDrConnectTask {
     @Scheduled(cron = "${drconnect.retention.cron}")
     private void executeRetentionPolicy() {
 
-        int retentionDays = Integer.valueOf(environment.getProperty("drconnect.retention.days"));
+//        int retentionDays = Integer.valueOf(environment.getProperty("drconnect.retention.days"));
+//
+//
+//        List<ProxyScan> proxyScans = proxyScanService.getRetentionPolicyCandidates();
 
 
-        List<ProxyScan> proxyScans = proxyScanService.getRetentionPolicyCandidates();
+//        proxyScans.stream()
+//                .forEach(scan -> {
+
+//                    LocalDateTime retententionExpireDate = scan.getDateTimeScan().plusDays(retentionDays);
+
+//                    try {
+//                        if (retententionExpireDate.isBefore(LocalDateTime.now())) {
+//                            proxyScanService.deleteScanfromDrConnect(scan.getToken(),
+//                                    scan.getLocationCode(),
+//                                    scan.getDateTimeScan().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+//                            logger.info(new StringBuilder()
+//                                            .append("Successfully executed DrConnect Scan Retention Policy and therefore deleted scan '{}' from ")
+//                                            .append("DRConnect database").toString(),
+//                                   scan.getId());
+//                        }
+//                    } catch (ConnectionPropertiesException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//
+//                });
 
 
-        proxyScans.stream()
-                .forEach(scan -> {
-
-                    LocalDateTime retententionExpireDate = scan.getDateTimeScan().plusDays(retentionDays);
-
-                    try {
-                        if (retententionExpireDate.isBefore(LocalDateTime.now())) {
-                            proxyScanService.deleteScanfromDrConnect(scan.getToken(),
-                                    scan.getLocationCode(),
-                                    scan.getDateTimeScan().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-                            logger.info(new StringBuilder()
-                                            .append("Successfully executed DrConnect Scan Retention Policy and therefore deleted scan '{}' from ")
-                                            .append("DRConnect database").toString(),
-                                   scan.getId());
-                        }
-                    } catch (ConnectionPropertiesException e) {
-                        e.printStackTrace();
-                    }
-
-
-                });
-
-
+//    }
     }
 }

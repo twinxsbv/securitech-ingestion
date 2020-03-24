@@ -10,11 +10,7 @@ spring:
       discovery:
         healthCheckPath: /management/health
         instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
-        service-name: securitech ingestion service
-        port: 8300
-      config:
-        watch:
-          enabled: false
+        service-name: securitech-ingestion-service
     stream:
       function:
         bindings:
@@ -27,6 +23,16 @@ spring:
           destination: 'securitech-queue'
     function:
       definition: log;supply
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ["health"]
+  endpoint:
+    health:
+      show-details: when_authorized
 
 # ===================================================================
 # Application specific properties

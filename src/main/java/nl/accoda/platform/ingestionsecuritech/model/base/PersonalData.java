@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -16,18 +16,19 @@ public class PersonalData {
     private String initials;
     private String lastNamePrefix;
     private String lastName;
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
     private String bsn;
     private boolean rtw;
     private String gender;
     private String nationality;
+    private byte[] photo;
 
 
     public PersonalData(String firstNames,
                         String initials,
                         String lastNamePrefix,
                         String lastName,
-                        LocalDateTime birthDate,
+                        LocalDate birthDate,
                         String bsn,
                         boolean rtw,
                         String gender,
