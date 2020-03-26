@@ -57,7 +57,12 @@ public class ProxyScanService {
 
         SecuritechDocumentScan result = new SecuritechDocumentScan();
         String token = applicationProperties.getSecuritech().getToken();
-        List<Map<String, String>> customers = applicationProperties.getSecuritech().getCustomers();
+        ApplicationProperties.SecuritechProperties securitech = applicationProperties.getSecuritech();
+
+       if(securitech.getCustomers() == null)
+           return new SecuritechDocumentScan();
+
+        List<Map<String, String>> customers = securitech.getCustomers();
 
         for (Map<String, String> customer : customers
         ) {

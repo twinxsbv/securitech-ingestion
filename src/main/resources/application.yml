@@ -2,7 +2,7 @@ server:
   port: 8180
 spring:
   application:
-    name: Securitech Ingestion Service
+    name: ingestionServiceSecuritech
   profiles:
     active: ${PROFILE}
   cloud:
@@ -11,6 +11,10 @@ spring:
         healthCheckPath: /management/health
         instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
         service-name: securitech-ingestion-service
+      config:
+        enabled: true
+        prefix: config
+        format: yaml
     stream:
       function:
         bindings:
@@ -52,5 +56,5 @@ application:
       days: ${SCANSERVICE_RETENTION_DAYS:3}
     token: '2d382644-bb54-4130-928b-cddb2c69e070'
     customers:
-       - custnumber: 'D2782'
-         locationcode: 'NLD1323VK23-002'
+       - custnumber: 'D000'
+         locationcode: 'NLD9999VK99-999'

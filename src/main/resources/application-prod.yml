@@ -6,6 +6,12 @@ management:
         allowed-methods: '*'
         allowed-headers: '*'
 spring:
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+        healthCheckPath: /management/health
+        healthCheckInterval: 15s
   data:
     mongodb:
       database: ${MONGO_DATABASE:drscans}
@@ -16,5 +22,3 @@ spring:
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:guest}
     password: ${RABBITMQ_PASSWORD:guest}
-
-

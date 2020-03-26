@@ -10,8 +10,8 @@ spring:
     consul:
       discovery:
         prefer-ip-address: true
-      host: localhost
-      port: 8500
+        healthCheckPath: /management/health
+        healthCheckInterval: 15s
   data:
     mongodb:
       database: ${MONGO_DATABASE:drscans}
