@@ -1,33 +1,5 @@
 server:
   port: 8180
-spring:
-  application:
-    name: ingestionServiceSecuritech
-  profiles:
-    active: ${PROFILE}
-  cloud:
-    consul:
-      discovery:
-        healthCheckPath: /management/health
-        instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
-        service-name: securitech-ingestion-service
-      config:
-        enabled: true
-        prefix: config
-        format: yaml
-    stream:
-      function:
-        bindings:
-          log-in-0: 'input'
-          supply-out-0: 'output'
-      bindings:
-        input:
-          destination: 'securitech-queue'
-        output:
-          destination: 'securitech-queue'
-    function:
-      definition: log;supply
-
 management:
   endpoints:
     web:
@@ -37,7 +9,6 @@ management:
   endpoint:
     health:
       show-details: when_authorized
-
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
@@ -45,7 +16,7 @@ management:
 # ===================================================================
 application:
   queue:
-    name: 'securitech-queue'
+    name: 'idscan-queue'
   securitech:
     url:
       callback: 'net.tcp://twinxsdrc.securiportal.com:16000/DRProxyINTCbC'
@@ -55,6 +26,3 @@ application:
       cron: ${SCANSERVICE_RETENTION_CRON:* * * * * *}
       days: ${SCANSERVICE_RETENTION_DAYS:3}
     token: '2d382644-bb54-4130-928b-cddb2c69e070'
-    customers:
-       - custnumber: 'D000'
-         locationcode: 'NLD9999VK99-999'

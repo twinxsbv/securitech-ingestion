@@ -1,0 +1,40 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: securitech-service
+  profiles:
+    active: prod
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: /management/health
+        instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+        service-name: securitech-service
+      config:
+        enabled: true
+        prefix: config
+        format: yaml
+        data-key: securitech
+      host: localhost
+      port: 8500
+    stream:
+      function:
+        bindings:
+          supply-out-0: 'output'
+      bindings:
+        output:
+          destination: 'idscan-queue'
+    function:
+      definition: supply
+
+  data:
+    mongodb:
+      database: securitech-service
+application:
+  securitech:
+    devices: []
+
